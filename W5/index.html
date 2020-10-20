@@ -3,8 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Lab Activity</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .math{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            box-shadow: 0 0 20px darkgrey;
+            width: 50%;
+            border-radius: 30px;
+            padding-left: 10px;
+        }
+        img{
+            width: 80%;
+            margin: auto;
+        }
+        .subjectDetails {
+            padding: 10%;
+            margin-left: 10%;
+            }
+    </style>
 </head>
 <body>
-
-</body>
-</html>
+    <main>
+        <h1>&nbsp; After School Club</h1>
+        <div class="math">
+            <img v-bind:src="subject.image">
+            <div class="subjectDetails">
+                <h2 v-html="subject.title"></h2>
+                <p v-text="subject.location"></p>
+                <p>Price: {{subject.price}}</p>
+                <p>Number of spaces: {{subject.spaces}}</p>
+                <input type="button" value="add to cart" v-on:click="addToCart">
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+        var webstore= new Vue({
+            el: ".math",
+            data:{
+                subject: {
+                    id: 1001,
+                    title: "<em>Math</em>",
+                    location: "London",
+                    price: 100,
+                    spaces:5,
+                    image: "images/math.png"
+                        },
+                cart: [],
+            },
+            methods:{
+                addToCart: function() {
+                    this.cart.push(this.subject.id);
+                }
+            }
+        });</script>
+    </body>
+    </html>
