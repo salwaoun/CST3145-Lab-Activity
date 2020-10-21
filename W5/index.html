@@ -3,8 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Lab Activity</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .math {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            box-shadow: 0 0 20px darkgrey;
+            width: 25%;
+            border-radius: 30px;
+            margin: 2%;
+            padding: 1rem;
+        }
+
+        img {
+            width: 80%;
+            margin: auto;
+        }
+
+        .subjectDetails {
+            margin-left: 10%;
+        }
+    </style>
 </head>
 <body>
-
+<main>
+    <h1>After School Club</h1>
+    <div class="math">
+        <img v-bind:src="subject.image">
+        <div class="subjectDetails">
+            <h2 v-html="subject.title"></h2>
+            <p v-text="subject.location"></p>
+            <p>Price: {{subject.price}}</p>
+            <p>Number of spaces: {{subject.spaces}}</p>
+            <input type="button" v-on:click="addToCart" value="Add to Cart">
+        </div>
+    </div>
+</main>
+<script type="text/javascript">
+    new Vue({
+        el: ".math",
+        data: {
+            subject: {
+                id: 1001,
+                title: "<em>Math</em>",
+                location: "London",
+                price: 100,
+                spaces: 5,
+                image: "images/math.png"
+            },
+            cart: [],
+        },
+        methods: {
+            addToCart: function () {
+                this.cart.push(this.subject.id);
+            }
+        }
+    });
+</script>
 </body>
 </html>
