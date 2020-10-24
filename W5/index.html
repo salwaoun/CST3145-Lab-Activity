@@ -37,7 +37,7 @@
             <p v-text="subject.location"></p>
             <p>Price: {{subject.price}}</p>
             <p>Number of spaces: {{subject.spaces - cartCount}}</p>
-            <input type="button" v-on:click="addToCart" v-if="visible" value="Add to Cart">
+            <input type="button" v-if="visible" v-on:click="addToCart" value="Add to Cart">
             <button disabled='disabled' v-else>Add To Cart</button>
         </div>
     </div>
@@ -59,21 +59,18 @@
         methods: {
             addToCart: function () {
                 this.cart.push(this.subject.id);
-           //this.subject.spaces--;
-            //   console.log(this.subject.spaces);
             }
-            },
-            computed:{
-            cartCount:function (){
+        },
+        computed: {
+            cartCount: function () {
                 return this.cart.length || '';
-                console.log(this.cart.length)
             },
-          
-            visible: function (){
+
+            visible: function () {
                 return this.subject.spaces > this.cartCount
             },
         }
-    
+
     });
 </script>
 </body>
