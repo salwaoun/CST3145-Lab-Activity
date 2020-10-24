@@ -29,7 +29,6 @@
 </head>
 <body>
 <main>
-    <h1>atul's commit</h1>
     <h1>After School Club</h1>
     <div class="math">
         <img v-bind:src="subject.image">
@@ -37,8 +36,9 @@
             <h2 v-html="subject.title"></h2>
             <p v-text="subject.location"></p>
             <p>Price: {{subject.price}}</p>
-            <p>Number of spaces: {{subject.spaces}}</p>
-            <input type="button" v-on:click="addToCart" value="Add to Cart">
+            <p>Number of spaces: {{subject.spaces - cartCount}}</p>
+            <input type="button" v-on:click="addToCart" v-if="visible" value="Add to Cart">
+            <button disabled='disabled' v-else>Add To Cart</button>
         </div>
     </div>
 </main>
@@ -59,8 +59,21 @@
         methods: {
             addToCart: function () {
                 this.cart.push(this.subject.id);
+           //this.subject.spaces--;
+            //   console.log(this.subject.spaces);
             }
+            },
+            computed:{
+            cartCount:function (){
+                return this.cart.length || '';
+                console.log(this.cart.length)
+            },
+          
+            visible: function (){
+                return this.subject.spaces > this.cartCount
+            },
         }
+    
     });
 </script>
 </body>
